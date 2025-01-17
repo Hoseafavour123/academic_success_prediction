@@ -35,21 +35,15 @@ def index():
         parental_support = int(request.form["parental_support"])
         peer_influence = int(request.form["peer_influence"])
 
-        # Make a prediction
-        input_data = [[
-            campus_residence, convenience, electricity_access,
-            water_access, internet_access, study_environment,
-            parental_support, peer_influence
-        ]]
-        prediction = model.predict(input_data)[0]
-        if prediction is not None:
-            prediction = prediction[0] * 100  # Assuming the prediction is a probability, convert to percentage
+      # Check if the prediction is valid (not None)
+        if prediction is not None and len(prediction) > 0:
+            prediction = prediction[0] * 100  # Assuming it's a probability and converting to percentage
+            prediction = round(prediction, 2)
             message = generate_message(prediction)
         else:
             message = "Error: Unable to make a prediction. Please check your inputs or try again later."
-            
-    return render_template("index.html", prediction=(round(prediction, 2) * 100), message=message)
 
+    return render_template("index.html", prediction=prediction, message=message)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5004)
