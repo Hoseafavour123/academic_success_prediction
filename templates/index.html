@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Success Prediction</title>
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>📚 Predict Your Academic Success 🚀</h1>
+    <form method="POST">
+      <!-- Flexbox Section for Campus Residence and Convenience -->
+      <div class="form-group">
+        <div>
+          <label for="campus_residence">Campus Residence 🏡:</label>
+          <select name="campus_residence" required>
+            <option value="1">On-Campus</option>
+            <option value="0">Off-Campus</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="convenience">Convenience 🌍:</label>
+          <select name="convenience" required>
+            <option value="1">Convenient</option>
+            <option value="0">Inconvenient</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Flexbox Section for Electricity and Water Access -->
+      <div class="form-group">
+        <div>
+          <label for="electricity_access">Electricity Access ⚡ (1-10):</label>
+          <input
+            type="number"
+            name="electricity_access"
+            min="1"
+            max="10"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="water_access">Water Access 💧 (1-10):</label>
+          <input type="number" name="water_access" min="1" max="10" required />
+        </div>
+      </div>
+
+      <!-- Flexbox Section for Internet and Study Environment -->
+      <div class="form-group">
+        <div>
+          <label for="internet_access">Internet Access 🌐 (1-10):</label>
+          <input
+            type="number"
+            name="internet_access"
+            min="1"
+            max="10"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="study_environment">Study Environment 📖 (1-10):</label>
+          <input
+            type="number"
+            name="study_environment"
+            min="1"
+            max="10"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Flexbox Section for Parental Support and Peer Influence -->
+      <div class="form-group">
+        <div>
+          <label for="parental_support">Parental Support 💕 (1-10):</label>
+          <input
+            type="number"
+            name="parental_support"
+            min="1"
+            max="10"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="peer_influence">Peer Influence 👥 (1-10):</label>
+          <input
+            type="number"
+            name="peer_influence"
+            min="1"
+            max="10"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit">🚀 Predict Now!</button>
+    </form>
+
+    {% if prediction is not none %}
+    <div class="result-container">
+      <h2>🎉 Prediction Result: {{ prediction }}%</h2>
+      <p>{{ message }}</p>
+    </div>
+    {% endif %}
+  </body>
+</html>
