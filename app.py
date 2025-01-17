@@ -46,8 +46,8 @@ def index():
         # Generate a dynamic message
         message = generate_message(prediction * 100)
 
-    return render_template("index.html", prediction=round(prediction, 2) * 100, message=message)
+    return render_template("index.html", prediction=(round(prediction, 2) * 100), message=message)
 
 
 if __name__ == '__main__':
-    app.run(port=4004)
+    app.run(host='0.0.0.0', port=5004)
