@@ -25,7 +25,9 @@ def index():
     message = None
 
     if request.method == "POST":
-        # Gather inputs from the form
+        print("POST request received!")  # Confirm POST request
+
+        # Print the data coming from the form
         campus_residence = int(request.form["campus_residence"])
         convenience = int(request.form["convenience"])
         electricity_access = int(request.form["electricity_access"])
@@ -35,9 +37,22 @@ def index():
         parental_support = int(request.form["parental_support"])
         peer_influence = int(request.form["peer_influence"])
 
-      # Check if the prediction is valid (not None)
+        print(f"Form Data: {campus_residence}, {convenience}, {electricity_access}, {water_access}, {internet_access}, {study_environment}, {parental_support}, {peer_influence}")
+
+        # Make prediction
+        input_data = [[
+            campus_residence, convenience, electricity_access,
+            water_access, internet_access, study_environment,
+            parental_support, peer_influence
+        ]]
+
+        prediction = model.predict(input_data)
+
+        # Check prediction and print it for debugging
+        print(f"Prediction Result: {prediction}")
+
         if prediction is not None and len(prediction) > 0:
-            prediction = prediction[0] * 100  # Assuming it's a probability and converting to percentage
+            prediction = prediction[0] * 100  # Convert to percentage
             prediction = round(prediction, 2)
             message = generate_message(prediction)
         else:
