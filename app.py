@@ -42,10 +42,12 @@ def index():
             parental_support, peer_influence
         ]]
         prediction = model.predict(input_data)[0]
-        
-        # Generate a dynamic message
-        message = generate_message(prediction * 100)
-
+        if prediction is not None:
+            prediction = prediction[0] * 100  # Assuming the prediction is a probability, convert to percentage
+            message = generate_message(prediction)
+        else:
+            message = "Error: Unable to make a prediction. Please check your inputs or try again later."
+            
     return render_template("index.html", prediction=(round(prediction, 2) * 100), message=message)
 
 
